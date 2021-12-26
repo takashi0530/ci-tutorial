@@ -1,0 +1,13 @@
+# CircleCIのバージョン
+version: 2.1
+# ジョブの定義（ひとつから複数個） CircleCIのジョブとは、最小単位の処理(ステップ)の集合体
+jobs:
+  build:
+    # CircleCIの処理はDockerコンテナ上で処理される
+    docker:
+      # 使用するDockerイメージを指定する（以下はCircleCIが用意しているPHPとnode.jsのDockerイメージを使用する）
+      - image: circleci/php:7.3-node-browsers
+    # stepsには一つ以上の処理を定義する
+    steps:
+      # runには一つの処理の内容を定義する（ここではshellスクリプトのコマンドechoを使用してHelloを表示する処理を実行）
+      - run: echo "Hello World"
