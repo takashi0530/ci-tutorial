@@ -25,11 +25,7 @@ jobs:
       - run: npm ci
       # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
       - run: npm run dev
-      # テストの実行ステップの追加 （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
+      # テストの実行ステップの追加  （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
       - run:
-        name: php test
-        command: vendor/bin/phpunit
-
-
-
-        # 2022/01/08 .env.testing作成後から！
+            name: php test
+            command: vendor/bin/phpunit
