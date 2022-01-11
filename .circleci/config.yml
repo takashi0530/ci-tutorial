@@ -18,9 +18,9 @@ jobs:
 
       # checkoutはGitHubからCircleCIの環境にソースコードをコピー（git clone）してくる
       - checkout
-      - run:
-            working_directory: backend
-            command: dotnet build
+      #   - run:
+            # working_directory: backend
+            # command: dotnet build
       # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
       - run: sudo ./backend/composer self-update --2
       - run: composer ./backend/install -n --prefer-dist
