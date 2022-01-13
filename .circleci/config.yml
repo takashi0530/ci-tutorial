@@ -21,15 +21,11 @@ jobs:
       #   - run:
             # working_directory: backend
             # command: dotnet build
-      - run: ls
-      - run: cd backend
       # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
-      - run: ./backend/ sudo composer self-update --2
-      - run: ls
+      - run: sudo composer self-update --2
       - run: cd backend
       - run: ls
-
-      - run: composer install -n --prefer-dist
+      - run: ./backend/composer install -n --prefer-dist
       # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
       - run: npm ci
       # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
