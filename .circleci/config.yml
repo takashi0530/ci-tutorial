@@ -21,6 +21,7 @@ jobs:
       #   - run:
             # working_directory: backend
             # command: dotnet build
+      - run: ls
       # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
       - run: sudo ./backend/composer self-update --2
       - run: composer ./backend/install -n --prefer-dist
