@@ -18,6 +18,7 @@ jobs:
 
         # checkoutはGitHubからCircleCIの環境にソースコードをコピー（git clone）してくる
         - checkout
+
         # - restore_cache:
             # keys:
             # "composer.lock" can be used if it is committed to the repo
@@ -26,8 +27,6 @@ jobs:
         # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
         - run: sudo composer self-update --1
 
-        - run: cd backend
-        # - run:
         - run:
             working_directory: backend
             command: sudo composer install -n --prefer-dist
@@ -37,8 +36,10 @@ jobs:
             command: npm ci
 
         # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
-        - run: npm run dev
+        - run:
+            working_directory: backend
+            command: npm run dev
         # テストの実行ステップの追加  （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
         - run:
             name: php test
-            command: vendor/bin/phpunit
+            command: backend/vendor/bin/phpunit
