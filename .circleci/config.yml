@@ -23,14 +23,14 @@ jobs:
             # "composer.lock" can be used if it is committed to the repo
             - v1-dependencies-{{ checksum "backend/composer.json" }}
 
-        #   - run:
-                # working_directory: backend
-                # command: dotnet build
         # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
         - run: sudo composer self-update --2
+
         - run: cd backend
         # - run:
-        - run: sudo composer install -n --prefer-dist
+        - run:
+            working_directory: backend
+            command: sudo composer install -n --prefer-dist
         # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
         - run: npm ci
         # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
