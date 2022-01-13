@@ -24,7 +24,7 @@ jobs:
             - v1-dependencies-{{ checksum "backend/composer.json" }}
 
         # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
-        - run: sudo composer self-update --2
+        - run: sudo composer self-update --1
 
         - run: cd backend
         # - run:
