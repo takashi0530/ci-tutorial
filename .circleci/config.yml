@@ -24,7 +24,7 @@ jobs:
       - run: ls
       - run: cd backend
       # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
-      - run: .backend/ sudo composer self-update --2
+      - run: ./backend/ sudo composer self-update --2
       - run: ls
       - run: cd backend
       - run: ls
