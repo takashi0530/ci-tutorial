@@ -42,4 +42,5 @@ jobs:
         # テストの実行ステップの追加  （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
         - run:
             name: php test
-            command: backend/vendor/bin/phpunit
+            working_directory: backend
+            command: vendor/bin/phpunit
