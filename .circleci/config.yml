@@ -25,7 +25,7 @@ jobs:
       - run: sudo composer self-update --2
       - run: cd backend
       - run: ls
-      - run: ./backend/composer install -n --prefer-dist
+      - run: sudo composer install -n --prefer-dist
       # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
       - run: npm ci
       # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
