@@ -25,6 +25,8 @@ jobs:
       - run: cd backend
       # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
       - run: sudo composer self-update --2
+      - run: ls
+      - run: cd backend
       - run: composer install -n --prefer-dist
       # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
       - run: npm ci
