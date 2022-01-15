@@ -2,13 +2,45 @@
 version: 2.1
 # ジョブの定義（ひとつから複数個） CircleCIのジョブとは、最小単位の処理(ステップ)の集合体
 jobs:
-  build:
-    # CircleCIの処理はDockerコンテナ上で処理される
-    docker:
-      # 使用するDockerイメージを指定する（以下はCircleCIが用意しているPHPとnode.jsのDockerイメージを使用する）
-      - image: circleci/php:7.3-node-browsers
-    # stepsには一つ以上の処理を定義する
-    steps:
-      # runには一つの処理の内容を定義する（ここではshellスクリプトのコマンドechoを使用してHelloを表示する処理を実行）
-      - run: echo "Hello World"
-      
+    build:
+
+        # CircleCIの処理はDockerコンテナ上で処理される
+        docker:
+            # 使用するDockerイメージを指定する（以下はCircleCIが用意しているPHPとnode.jsのDockerイメージを使用する）
+            - image: circleci/php:7.3-node-browsers
+
+        # stepsには一つ以上の処理を定義する
+        steps:
+        # runには一つの処理の内容を定義する（ここではshellスクリプトのコマンドechoを使用してHelloを表示する処理を実行）
+        # - run: echo "Hello World"
+
+        # CircleCIでテストを実行するため以下を追記
+
+        # checkoutはGitHubからCircleCIの環境にソースコードをコピー（git clone）してくる
+        - checkout
+
+        # - restore_cache:
+            # keys:
+            # "composer.lock" can be used if it is committed to the repo
+            # - v1-dependencies-{{ checksum "backend/composer.json" }}
+
+        # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
+        - run: sudo composer self-update --1
+
+        - run:
+            working_directory: backend
+            command: sudo composer install -n --prefer-dist
+                    # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
+        - run: 
+            working_directory: backend
+            command: npm ci
+
+        # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
+        - run:
+            working_directory: backend
+            command: npm run dev
+        # テストの実行ステップの追加  （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
+        - run:
+            name: php test
+            working_directory: backend
+            command: vendor/bin/phpunit
