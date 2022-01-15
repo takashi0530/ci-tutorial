@@ -46,7 +46,7 @@ jobs:
             # composer.lockに変更があればrestore_cacheでキャッシュを復元せずに、save_cacheで新しいkeyにてキャッシュを保存し直す
             key: composer-v1-{{ checksum "backend/composer.lock" }}
             paths:
-                - vendor
+                - backend/vendor
 
         # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
         - run:
