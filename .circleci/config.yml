@@ -36,6 +36,8 @@ jobs:
             working_directory: backend
             command: sudo composer install -n --prefer-dist
 
+# キャッシュの処理ができてるか確認 TODO
+
         # キャッシュの保存  keyに指定した名前でキャッシュを保存する。保存するディレクトリ名・ファイル名をpathsに指定する。 またキャッシュの保存は一ヶ月のみ。キャッシュを保存しなおしたい場合は、v1,v2と名前を変えていく
         # キャッシュが保存された場合は Stored Cache to... と表示される
         # restore_cacheの段階でキャッシュが見つかった場合、Skipping cache generation, cache already exists.. と表示されsave_cacheのステップはスルーされる
