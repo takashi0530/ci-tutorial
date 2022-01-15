@@ -44,7 +44,7 @@ jobs:
         - save_cache:
             # キャッシュに指定する名前(key)は何でもOKだがわかりやすい名前をつけること  checksum ファイル名をハッシュ化した値を算出
             # composer.lockに変更があればrestore_cacheでキャッシュを復元せずに、save_cacheで新しいkeyにてキャッシュを保存し直す
-            key: composer-v1-{{ checksum "composer.lock" }}
+            key: composer-v1-{{ checksum "backend/composer.lock" }}
             paths:
                 - vendor
 
