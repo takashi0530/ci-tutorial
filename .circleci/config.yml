@@ -57,7 +57,7 @@ jobs:
         - run:
             working_directory: backend
             command: npm run dev
-        # テストの実行ステップの追加   （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
+        # テストの実行ステップの追加  （ArticleTest.phpをコマンドでテストしたときと同様のテストを行う）
         - run:
             name: php test
             working_directory: backend
