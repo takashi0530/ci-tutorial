@@ -27,7 +27,7 @@ jobs:
         # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
         - run: sudo composer self-update --1
 
-        # キャッシュの設定  restore_cache 保存したキャッシュの復元を行う keyには復元するキャッシュの名前を指定する キャッシュがあれば復元しなければ何も行われない
+        # キャッシュの設定  restore_cache 保存したキャッシュの復元を行う keyには復元するキャッシュの名前を指定する キャッシュがなければ何もしない   キャッシュがない場合の表示： No cache is found..
         - restore_cache:
             key: composer-v1-{{ checksum "backend/composer.lock" }}
 
@@ -35,8 +35,6 @@ jobs:
         - run:
             working_directory: backend
             command: sudo composer install -n --prefer-dist
-
-# キャッシュの処理ができてるか確認 TODO
 
         # キャッシュの保存  keyに指定した名前でキャッシュを保存する。保存するディレクトリ名・ファイル名をpathsに指定する。 またキャッシュの保存は一ヶ月のみ。キャッシュを保存しなおしたい場合は、v1,v2と名前を変えていく
         # キャッシュが保存された場合は Stored Cache to... と表示される
