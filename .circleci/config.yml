@@ -49,7 +49,7 @@ jobs:
             paths:
                 - .backend/vendor
 
-        #
+        # 保存されたキャッシュの復元
         - restore_cache:
             key: npm-v1-{{ checksum "./backend/package-lock.json" }}
 
@@ -62,12 +62,15 @@ jobs:
         - run:
             name: npm ci
             working_directory: backend
+            # CircleCIのcommandに複数行に渡ってコマンド記述する場合は最初に | を記述し次の行からコマンドを記述する。 
+            # if以降シェルスクリプト。ifの終わりはfiとする。[の直後と]の直前に半角スペース必須。node_modulesのディレクトリが存在すればtrue、しなければfalse。npm ciコマンドではパッケージをインストールする前にいったんnode_modulesディレクトリを削除してしまうため
             command: |
                 if [ ! -d node_modules ]; then
                 npm ci
                 fi
         - save_cache:
             key: npm-v1-{{ checksum "./backend/package.json" }}
+            # pathsに指定されたnode_modulesをキャッシュに保存する
             paths:
                 - node_modules
 
