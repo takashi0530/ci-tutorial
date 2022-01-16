@@ -51,7 +51,7 @@ jobs:
 
         #
         - restore_cache:
-            key: npm-v1-{{ checksum "package-lock.json" }}
+            key: npm-v1-{{ checksum ".backend/package-lock.json" }}
 
         # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
         # - run:
