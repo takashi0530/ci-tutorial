@@ -32,11 +32,9 @@ jobs:
             key: composer-v1-{{ checksum "./backend/composer.lock" }}
 
         # 前述のキャッシュが存在する場合、Nothing to install or update と表示され、以下の処理はされずに時間の短縮となる
-        # - run:
-        #     working_directory: backend
-        #     command: composer install -n --prefer-dist
-        - run: composer install -n --prefer-dist
-
+        - run:
+            working_directory: backend
+            command: composer install -n --prefer-dist
 
         # キャッシュの保存  keyに指定した名前でキャッシュを保存する。保存するディレクトリ名・ファイル名をpathsに指定する。 またキャッシュの保存は一ヶ月のみ。キャッシュを保存しなおしたい場合は、v1,v2と名前を変えていく
         # キャッシュが保存された場合は Stored Cache to... と表示される
