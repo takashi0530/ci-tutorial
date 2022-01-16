@@ -25,7 +25,7 @@ jobs:
             # - v1-dependencies-{{ checksum "backend/composer.json" }}
 
         # CircleCIで実施するテストはひつようなパッケージを毎回インストールしなければならない
-        - run: 
+        - run:
             working_directory: backend
             command: sudo composer self-update --1
 
@@ -49,10 +49,27 @@ jobs:
             paths:
                 - .backend/vendor
 
+        #
+        - restore_cache:
+            key: npm-v1-{{ checksum "./backend/package-lock.json" }}
+
         # js各種パッケージのインストール（ローカル開発環境を構築したときと同様にjsのトランスパイルを行う）
+        # - run:
+        #     working_directory: backend
+        #     command: npm ci
+
+        #
         - run:
-            working_directory: backend
-            command: npm ci
+            name: npm ci
+            command: |
+            if[ !-d node_modules ]; then
+                npm ci
+            fi
+        - save_cache:
+            key: npm-v1-{{ checksum "package.json" }}
+            paths:
+                - node_modules
+
 
         # jsのトランスパイル   runのマニュアル  https://circleci.com/docs/ja/2.0/configuration-reference/#run
         - run:
