@@ -61,6 +61,7 @@ jobs:
         #
         - run:
             name: npm ci
+            working_directory: backend
             command: |
                 if [ ! -d node_modules ]; then
                 npm ci
